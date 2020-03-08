@@ -1,9 +1,74 @@
-﻿<!DOCTYPE html>
+﻿@model EmployeeManagment.Models.Employee
+
+<!DOCTYPE html>
 <html>
 <head>
     <title></title>
+    <style>
+        body {
+            background-color: black;
+        }
+        div {
+            color: white;
+            font-size: larger;
+        }
+        .span {
+            color: orangered;
+        }
+        .viewData {
+            color: greenyellow;        
+        }
+        .viewBag {
+            color: gold
+        }
+        .strongType {
+            color: skyblue;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello from Views/Home folder</h1>
+    <section class="viewData">
+        <h1>@ViewData["PageTitleVD"]</h1>
+        @{
+            var employee = ViewData["Employee"] as EmployeeManagment.Models.Employee;
+        }
+
+        <div>
+            <p>Name: <span class="span">@employee.Name</span></p>
+        </div>
+        <div>
+            <p>Email: <span class="span">@employee.Email</span></p>
+        </div>
+        <div>
+            <p>Department: <span class="span">@employee.Department</span></p>
+        </div>
+    </section>
+    <hr />
+    <section class="viewBag">
+        <h1>@ViewBag.PageTitleVB</h1>
+        <div>
+            <p>Name: <span class="span">@ViewBag.Employee.Name</span></p>
+        </div>
+        <div>
+            <p>Email: <span class="span">@ViewBag.Employee.Email</span></p>
+        </div>
+        <div>
+            <p>Department: <span class="span">@ViewBag.Employee.Department</span></p>
+        </div>
+    </section>
+    <hr />
+    <section class="strongType">
+        <h1>StronglyType Title</h1>
+        <div>
+            <p>Name: <span class="span">@Model.Name</span></p>
+        </div>
+        <div>
+            <p>Email: <span class="span">@Model.Email</span></p>
+        </div>
+        <div>
+            <p>Department: <span class="span">@Model.Department</span></p>
+        </div>
+    </section>
+    
 </body>
 </html>
