@@ -1,4 +1,4 @@
-﻿@model EmployeeManagment.Models.Employee
+﻿@model EmployeeManagment.ViewModels.HomeDetailsViewModel
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,8 @@
             font-size: larger;
         }
         .span {
-            color: orangered;
+            font-weight: bolder;
+            color: hotpink;
         }
         .viewData {
             color: greenyellow;        
@@ -21,7 +22,7 @@
         .viewBag {
             color: gold
         }
-        .strongType {
+        .viewModel {
             color: skyblue;
         }
     </style>
@@ -57,16 +58,16 @@
         </div>
     </section>
     <hr />
-    <section class="strongType">
-        <h1>StronglyType Title</h1>
+    <section class="viewModel">
+        <h1>@Model.PageTitle</h1>
         <div>
-            <p>Name: <span class="span">@Model.Name</span></p>
+            <p>Name: <span class="span">@Model.Employee.Name</span></p>
         </div>
         <div>
-            <p>Email: <span class="span">@Model.Email</span></p>
+            <p>Email: <span class="span">@Model.Employee.Email</span></p>
         </div>
         <div>
-            <p>Department: <span class="span">@Model.Department</span></p>
+            <p>Department: <span class="span">@Model.Employee.Department</span></p>
         </div>
     </section>
     

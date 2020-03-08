@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using EmployeeManagment.ViewModels;
 
 namespace EmployeeManagment.Controllers
 {
@@ -21,16 +22,22 @@ namespace EmployeeManagment.Controllers
 
         public ViewResult Details()
         {
-            Employee model = _employeeRepository.GetEmployee(1);
+            HomeDetailsViewModel model = new HomeDetailsViewModel
+            {
+                Employee = _employeeRepository.GetEmployee(1),
+                PageTitle = "ViewModel Method"
+            };            
             
             //PASSING DATA BY ViewData
-            ViewData["Employee"] = model;
-            ViewData["PageTitleVD"] = "ViewData Title";
+            ViewData["Employee"] = model.Employee;
+            ViewData["PageTitleVD"] = "ViewData Method";
 
             //PASSING BY ViewBag
-            ViewBag.Employee = model;
-            ViewBag.PageTitleVB = "ViewBag Title";
+            ViewBag.Employee = model.Employee;
+            ViewBag.PageTitleVB = "ViewBag Method";
 
+            //PASSING BY STRONGLY TYPE AND VIEWMODEL
+            
             return View(model);
         }
     }
