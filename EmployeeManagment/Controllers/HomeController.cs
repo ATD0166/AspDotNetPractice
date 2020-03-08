@@ -14,10 +14,12 @@ namespace EmployeeManagment.Controllers
         public HomeController(IEmployeeRepository employees)
         {
             _employeeRepository = employees;
-        }
-        public string Index() 
+        }        
+
+        public ViewResult Index()
         {
-            return _employeeRepository.GetEmployee(1).Name;
+            IEnumerable<Employee> model = _employeeRepository.GetAllEmployees();
+            return View(model);
         }
 
         public ViewResult Details()
