@@ -1,34 +1,12 @@
 ﻿@model EmployeeManagment.ViewModels.HomeDetailsViewModel
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details Page";
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-    <style>
-        body {
-            background-color: black;
-        }
-        div {
-            color: white;
-            font-size: larger;
-        }
-        .span {
-            font-weight: bolder;
-            color: hotpink;
-        }
-        .viewData {
-            color: greenyellow;        
-        }
-        .viewBag {
-            color: gold
-        }
-        .viewModel {
-            color: skyblue;
-        }
-    </style>
-</head>
-<body>
-    <section class="viewData">
+
+@section Details {
+    <section class="viewData, details">
         <h1>@ViewData["PageTitleVD"]</h1>
         @{
             var employee = ViewData["Employee"] as EmployeeManagment.Models.Employee;
@@ -45,7 +23,7 @@
         </div>
     </section>
     <hr />
-    <section class="viewBag">
+    <section class="viewBag, details">
         <h1>@ViewBag.PageTitleVB</h1>
         <div>
             <p>Name: <span class="span">@ViewBag.Employee.Name</span></p>
@@ -58,7 +36,7 @@
         </div>
     </section>
     <hr />
-    <section class="viewModel">
+    <section class="viewModel, details">
         <h1>@Model.PageTitle</h1>
         <div>
             <p>Name: <span class="span">@Model.Employee.Name</span></p>
@@ -70,6 +48,4 @@
             <p>Department: <span class="span">@Model.Employee.Department</span></p>
         </div>
     </section>
-    
-</body>
-</html>
+}
