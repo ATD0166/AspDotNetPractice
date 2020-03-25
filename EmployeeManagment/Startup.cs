@@ -30,7 +30,7 @@ namespace EmployeeManagment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<AppDBContext>(
-                options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
+                options => options.UseSqlServer(_config.GetConnectionString("EmployeeDB2Connection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EmployeeManagment.Migrations
 {
-    public partial class NewMigration2 : Migration
+    public partial class NewConsole : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
