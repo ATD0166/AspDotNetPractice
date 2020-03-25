@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace EmployeeManagment.ViewModels
 {
     public class EmployeeCreateViewModel
-    {
-        public int Id { get; set; }
+    {        
         [Required]
         [MaxLength(30, ErrorMessage = "Cannot exceed 30 characters")]
         public string Name { get; set; }
@@ -21,6 +20,5 @@ namespace EmployeeManagment.ViewModels
         [Required]
         public Dept? Department { get; set; }        
         public IFormFile Photo { get; set; }
-
     }
 }
