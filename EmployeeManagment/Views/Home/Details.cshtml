@@ -1,50 +1,28 @@
 ﻿@model HomeDetailsViewModel
-@{     
+@{
     ViewBag.Title = "Employee Details";
+    var photoPath = "~/images/" + (Model.Employee.PhotoPath ?? "unnamed.jpg");
 }
 
 
-@section Details {
-    <section class="viewData, details">
-        <h1>@ViewData["PageTitleVD"]</h1>
-        @{
-            var employee = ViewData["Employee"] as EmployeeManagment.Models.Employee;
-        }
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Employee.Name</h1>
+            </div>
 
-        <div>
-            <p>Name: <span class="span">@employee.Name</span></p>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="@photoPath" asp-append-version="true"/>
+                <h4>Employee ID : @Model.Employee.Id</h4>
+                <h4>Email : @Model.Employee.Email</h4>
+                <h4>Department : @Model.Employee.Department</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back</a>
+                <a a asp-controller="home" asp-action="edit" asp-route-id="@Model.Employee.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="home" asp-action="delete" asp-route-id="@Model.Employee.Id" class="btn btn-danger">Delete</a>
+            </div>
         </div>
-        <div>
-            <p>Email: <span class="span">@employee.Email</span></p>
-        </div>
-        <div>
-            <p>Department: <span class="span">@employee.Department</span></p>
-        </div>
-    </section>
-    <hr />
-    <section class="viewBag, details">
-        <h1>@ViewBag.PageTitleVB</h1>
-        <div>
-            <p>Name: <span class="span">@ViewBag.Employee.Name</span></p>
-        </div>
-        <div>
-            <p>Email: <span class="span">@ViewBag.Employee.Email</span></p>
-        </div>
-        <div>
-            <p>Department: <span class="span">@ViewBag.Employee.Department</span></p>
-        </div>
-    </section>
-    <hr />
-    <section class="viewModel, details">
-        <h1>@Model.PageTitle</h1>
-        <div>
-            <p>Name: <span class="span">@Model.Employee.Name</span></p>
-        </div>
-        <div>
-            <p>Email: <span class="span">@Model.Employee.Email</span></p>
-        </div>
-        <div>
-            <p>Department: <span class="span">@Model.Employee.Department</span></p>
-        </div>
-    </section>
-}
+    </div>
+</div>

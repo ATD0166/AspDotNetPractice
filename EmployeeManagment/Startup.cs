@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EmployeeManagment
 {
@@ -26,9 +28,16 @@ namespace EmployeeManagment
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddMvc(options => options.EnableEndpointRouting =false);
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+        {
+            services.AddDbContextPool<AppDBContext>(
+                options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+
+            services.AddMvc(
+                options => options.EnableEndpointRouting = false)
+                .AddXmlSerializerFormatters(); 
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepositery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,17 +46,18 @@ namespace EmployeeManagment
             if (env.IsDevelopment())
             {
                 DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions();
-                developerExceptionPageOptions.SourceCodeLineCount = 1;
+                developerExceptionPageOptions.SourceCodeLineCount = 10; /* 錯誤頁面中出錯程式碼的顯示行數 */
                 app.UseDeveloperExceptionPage(developerExceptionPageOptions);
             }
 
-
+            /* UseFileServer = UseDeafaultFiles + UseStaticFiles + UseDirectoryBrowser */
             //FileServerOptions fileserveroptions = new FileServerOptions();
             //fileserveroptions.DefaultFilesOptions.DefaultFileNames.Clear();
             //fileserveroptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
             //app.UseFileServer(fileserveroptions);
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routing => {
                 routing.MapRoute("Default", "{controller=home}/{action=index}/{id?}");
@@ -61,7 +71,6 @@ namespace EmployeeManagment
                 {                    
                     await context.Response.WriteAsync("Hello World!");
                     //await context.Response.WriteAsync(System.Diagnostics.Process.GetCurrentProcess().ProcessName);
-                    //await context.Response.WriteAsync(_config["MyKey"]);
                 });
             });           
         }
